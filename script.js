@@ -1,130 +1,159 @@
-// ========================================================
-// JavaScript DOM Manipulation Lab - 40 Mini Exercises
-// ========================================================
+ //  PART 1: Selecting and Styling Elements (1–10)
+
+    document.getElementById("title").style.color = "red"; //1️
+    document.querySelectorAll("p").forEach(p => p.style.backgroundColor = "lightgray"); //2️
+    document.getElementById("title").textContent = "Welcome to the DOM Lab!"; //3️
+    document.querySelectorAll("div").forEach(div => div.style.border = "1px solid black"); //4️
+    document.querySelector("h1").style.fontSize = "36px"; //5️
+    document.querySelectorAll(".highlight").forEach(el => el.style.color = "blue"); //6️
+    document.querySelector("div").classList.add("active"); //7️
+    document.body.style.backgroundColor = "lightblue"; //8️
+    document.querySelectorAll("p").forEach(p => p.style.fontFamily = "Arial"); //9️
+    document.getElementById("sampleImage").src = "https://placehold.co/150x150"; //10
+
+
+    //  PART 2: Creating and Appending Elements (11–20)
+
+    const newP = document.createElement("p"); //11
+    newP.textContent = "This is a new paragraph created by JS.";
+    document.body.appendChild(newP);
+
+    const newLi = document.createElement("li"); //12
+    newLi.textContent = "New list item added dynamically.";
+    document.getElementById("list").appendChild(newLi);
+
+    const newBtn = document.createElement("button"); //13
+    newBtn.textContent = "Click Me!";
+    document.querySelector("div").appendChild(newBtn);
+
+    const newH2 = document.createElement("h2"); //14
+    newH2.textContent = "Inserted H2 dynamically!";
+    const firstP = document.querySelector("p");
+    document.body.insertBefore(newH2, firstP);
+
+    const newImg = document.createElement("img"); //15
+    newImg.src = "https://placehold.co/80x80";
+    newImg.width = 80;
+    newImg.height = 80;
+    document.body.appendChild(newImg);
+
+    for (let i = 1; i <= 3; i++) { //16
+      const li = document.createElement("li");
+      li.textContent = `Extra item ${i}`;
+      document.getElementById("list").appendChild(li);
+    }
+
+    const card = document.createElement("div"); //17
+    card.className = "card";
+    card.textContent = "This is a card created dynamically!";
+    document.body.appendChild(card);
+
+    const nameP = document.createElement("p"); //18
+    nameP.textContent = "Created by: Your Name";
+    document.body.appendChild(nameP);
+
+    document.querySelectorAll("p").forEach(p => { //19
+      const span = document.createElement("span");
+      span.textContent = " [Edited]";
+      p.appendChild(span);
+    });
+
+    const ul = document.getElementById("list"); //20
+    ul.removeChild(ul.lastElementChild);
+
+
+    //  PART 3: Event Handling (21–30)
+
+    document.getElementById("mainButton").addEventListener("click", () => { //21
+      alert("Main button clicked!");
+    });
+
+    document.querySelector("div").addEventListener("click", function() { //22
+      this.style.backgroundColor = "lightgreen";
+    });
+
+    document.querySelectorAll("p").forEach(p => { //23
+      p.addEventListener("mouseover", () => p.style.fontWeight = "bold");
+      p.addEventListener("mouseleave", () => p.style.fontWeight = "normal"); //24
+    });
+
+    const hideBtn = document.createElement("button"); //25
+    hideBtn.textContent = "Hide Image";
+    document.body.appendChild(hideBtn);
+    hideBtn.addEventListener("click", () => {
+      document.getElementById("sampleImage").style.display = "none";
+    });
+
+    const showBtn = document.createElement("button"); //26
+    showBtn.textContent = "Show Image";
+    document.body.appendChild(showBtn);
+    showBtn.addEventListener("click", () => {
+      document.getElementById("sampleImage").style.display = "block";
+    });
+
+    let count = 0; //27
+    const counterBtn = document.createElement("button");
+    counterBtn.textContent = "Counter: 0";
+    document.body.appendChild(counterBtn);
+    counterBtn.addEventListener("click", () => {
+      count++;
+      counterBtn.textContent = `Counter: ${count}`;
+    });
 
-// 🟩 PART 1: Selecting and Styling Elements (1–10)
+    document.getElementById("displayButton").addEventListener("click", () => { //28
+      const inputVal = document.getElementById("userInput").value;
+      document.getElementById("output").textContent = inputVal;
+    });
 
-// 1️⃣ Change text color of heading with id="title" to red.
+    const colorBtn = document.createElement("button"); //29
+    colorBtn.textContent = "Random Color";
+    document.body.appendChild(colorBtn);
+    colorBtn.addEventListener("click", () => {
+      const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+      document.body.style.backgroundColor = randomColor;
+    });
 
+    document.addEventListener("keydown", (e) => { //30
+      document.getElementById("output").textContent = `Key pressed: ${e.key}`;
+    });
 
-// 2️⃣ Change background color of all <p> elements to lightgray.
 
+    //  PART 4: Modifying and Traversing DOM (31–40)
 
-// 3️⃣ Change heading text (#title) to "Welcome to the DOM Lab!".
+    document.querySelector("li").textContent = "First item updated!"; //31
 
+    document.getElementById("mainButton").addEventListener("click", () => { //32
+      console.log("Input value:", document.getElementById("userInput").value);
+    });
 
-// 4️⃣ Add a solid black border to all <div> elements.
+    const pCount = document.querySelectorAll("p").length; //33
+    console.log(`There are ${pCount} paragraphs.`);
+    alert(`There are ${pCount} paragraphs.`);
 
+    document.querySelectorAll("p").forEach(p => p.remove()); //34
 
-// 5️⃣ Increase font size of the first <h1> to 36px.
+    const oldH2 = document.querySelector("h2"); //35
+    const newH2Replace = document.createElement("h2");
+    newH2Replace.textContent = "New H2 replaced dynamically!";
+    oldH2.replaceWith(newH2Replace);
 
+    document.querySelectorAll("li").forEach(li => li.classList.add("highlighted")); //36
 
-// 6️⃣ Change text color of elements with class="highlight" to blue.
+    document.querySelectorAll("div").forEach(div => { //37
+      div.addEventListener("click", () => div.classList.toggle("active"));
+    });
 
+    const clone = document.getElementById("container").cloneNode(true); //38
+    document.body.appendChild(clone);
 
-// 7️⃣ Add CSS class "active" to the first <div>.
+    const scrollBtn = document.createElement("button"); //39
+    scrollBtn.textContent = "Scroll to Bottom";
+    document.body.appendChild(scrollBtn);
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    });
 
-
-// 8️⃣ Change the <body> background color to lightblue.
-
-
-// 9️⃣ Set the font family of all <p> elements to Arial.
-
-
-// 🔟 Change the image source of #sampleImage.
-
-
-// 🟦 PART 2: Creating and Appending Elements (11–20)
-
-// 1️⃣1️⃣ Create a new <p> and append it to the <body>.
-
-
-// 1️⃣2️⃣ Create a new <li> and add it to the existing <ul>.
-
-
-// 1️⃣3️⃣ Create a <button> labeled "Click Me!" and append it to a <div>.
-
-
-// 1️⃣4️⃣ Create <h2> dynamically and insert it before the first <p>.
-
-
-// 1️⃣5️⃣ Create an image and set width and height.
-
-
-// 1️⃣6️⃣ Add 3 new <li> items using a loop.
-
-
-// 1️⃣7️⃣ Create a <div> with class "card" and text inside.
-
-
-// 1️⃣8️⃣ Append a paragraph containing your name.
-
-
-// 1️⃣9️⃣ Add a <span>[Edited]</span> inside every <p>.
-
-
-// 2️⃣0️⃣ Remove the last child of <ul>.
-
-
-// 🟨 PART 3: Event Handling (21–30)
-
-// 2️⃣1️⃣ Add click event that shows an alert.
-
-
-// 2️⃣2️⃣ Change background color of a <div> when clicked.
-
-
-// 2️⃣3️⃣ When hovering over <p>, make it bold.
-
-
-// 2️⃣4️⃣ When mouse leaves paragraph, remove bold style.
-
-
-// 2️⃣5️⃣ Add button to hide the image.
-
-
-// 2️⃣6️⃣ Add button to show the image again.
-
-
-// 2️⃣7️⃣ Create a counter button that increases with each click.
-
-
-// 2️⃣8️⃣ Display entered text from an input when button clicked.
-
-
-// 2️⃣9️⃣ Change background color randomly when a button is clicked.
-
-
-// 3️⃣0️⃣ Display which key is pressed.
-
-
-// 🟧 PART 4: Modifying and Traversing DOM (31–40)
-
-// 3️⃣1️⃣ Change text of the first <li>.
-
-
-// 3️⃣2️⃣ Get input value when button clicked.
-
-
-// 3️⃣3️⃣ Count number of <p> and alert the count.
-
-
-// 3️⃣4️⃣ Remove all <p> elements.
-
-
-// 3️⃣5️⃣ Replace existing <h2> with new one.
-
-
-// 3️⃣6️⃣ Add CSS class 'highlighted' to all <li>.
-
-
-// 3️⃣7️⃣ Toggle a CSS class on <div> when clicked.
-
-
-// 3️⃣8️⃣ Clone an existing element and append copy.
-
-
-// 3️⃣9️⃣ Scroll smoothly to bottom when button clicked.
-
-
-// 4️⃣0️⃣ Build list dynamically using innerHTML from an array.
+    const fruits = ["Apple", "Banana", "Cherry", "Grapes"]; //40
+    const fruitList = document.createElement("ul");
+    fruitList.innerHTML = fruits.map(f => `<li>${f}</li>`).join("");
+    document.body.appendChild(fruitList);
